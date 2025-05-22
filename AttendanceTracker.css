@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+h3 {
+  color: #2a5a2a;
+  text-align: center;
+}
+
+label{
+  margin: 0px ;
+ align-items:right;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#attendanceTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border: 1px;
+
+}
+
+th {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+#studentListBody td{
+  text-align: center;
+  padding: 5px;
+  
+}
