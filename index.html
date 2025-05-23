@@ -11,48 +11,96 @@
 <body>
 
   <div class="container">
+    <h3>📋 Attendance TRACKER</h3> <br>
+    <label for="monthInput">Select Month:</label>
+    <br> <input type="month"
+      id="monthInput"><br><br>
+       <input type="text" placeholder="Enter name">
+          <button onclick="addPerson()">Add person</button>
+          <br><br>
     <table id="attendenceTable" >
       <thead>
-        <tr>
-          <th colspan="8">
-            <h3>📋 Attendance TRACKER</h3> <label for="monthInput">Select Month:</label> <input type="month"
-              id="monthInput">
-          </th>
-        </tr>
-        <tr>
+        <tr id="headerRow">
           <th>NAMES</th>
         </tr>
       </thead>
-      <tbody id="studentListBody">
-          <tr>
-            <td>A</td>
-            <td>predent</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>A</td>
-          </tr>
+      <tbody >
+          
       </tbody>
     </table>
 
   </div>
+  <script>
+  const monthInput = document.getElementById("monthInput");
+  const table = document.getElementById("attendanceTable");
+  const headerRow = document.getElementById("headerRow");
+  let daysInMonth = 0;
+
+  // Update headers based on selected month
+  monthInput.addEventListener("change", () => {
+    const [year, month] = monthInput.value.split("-").map(Number);
+    daysInMonth = new Date(year, month, 0).getDate();
+
+    // Clear previous date headers
+    while (headerRow.children.length > 1) {
+      headerRow.removeChild(headerRow.lastChild);
+    }
+
+    // Add date headers
+    for (let day = 1; day <= daysInMonth; day++) {
+      const th = document.createElement("th");
+      th.textContent = day;
+      headerRow.appendChild(th);
+    }
+
+    // Update existing rows with correct number of cells
+    document.querySelectorAll("#attendanceTable tbody tr").forEach(row => {
+      while (row.children.length > 1) row.removeChild(row.lastChild);
+      for (let i = 1; i <= daysInMonth; i++) {
+        const td = document.createElement("td");
+        td.addEventListener("click", () => toggleAttendance(td));
+        row.appendChild(td);
+      }
+    });
+  });
+
+  // Add new person row
+  function addPerson() {
+    const name = document.getElementById("nameInput").value.trim();
+    if (!name) return;
+
+    const row = document.createElement("tr");
+
+    // Name cell
+    const nameCell = document.createElement("td");
+    nameCell.textContent = name;
+    row.appendChild(nameCell);
+
+    // Attendance cells
+    for (let i = 1; i <= daysInMonth; i++) {
+      const td = document.createElement("td");
+      td.addEventListener("click", () => toggleAttendance(td));
+      row.appendChild(td);
+    }
+
+    document.querySelector("#attendanceTable tbody").appendChild(row);
+    document.getElementById("nameInput").value = "";
+  }
+
+  // Toggle attendance status
+  function toggleAttendance(cell) {
+    const current = cell.textContent;
+    if (current === "") {
+      cell.textContent = "✓";
+    } else if (current === "✓") {
+      cell.textContent = "✗";
+    } else {
+      cell.textContent = "";
+    }
+  }
+</script>
+
+
 </body>
 
 </html>
