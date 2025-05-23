@@ -20,7 +20,7 @@ input {
 }
 
 .container {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
@@ -39,7 +39,7 @@ th {
   text-align: center;
 }
 
-#studentListBody td{
+tbody td{
   text-align: center;
   padding: 5px;
   
